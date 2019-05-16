@@ -20,10 +20,11 @@ Project -> Targets->Capabilities ->App Group ID
 STEP 3: USE CODE
 
 A APP
+<code>
 let wormhole = MMWormhole(applicationGroupIdentifier: "your group id", optionalDirectory: "wormhole")
 //pass data
 wormhole.passMessageObject("your data" as NSString, identifier: "locostring")
-
+</code>
 
 
 B APP
