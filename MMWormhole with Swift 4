@@ -1,0 +1,38 @@
+此案例主要是需要用來兩個ＡＰＰ傳資料
+
+STEP 1:import MMWormhole
+
+附上連結，有安裝方法
+https://github.com/mutualmobile/MMWormhole
+我是先下載source 資料夾，標頭檔。"project"-Bridging-Header.h 
+#import "MMWormhole.h"
+#import "MMWormholeSession.h"
+Project -> Targets->Bulid Setting ->Packaging -> Define Modules-> Yes
+Project -> Targets->Bulid Setting ->Swift Compiler-General -> Bridging Header & name 要設好
+
+
+STEP 2: Create group ID 
+
+Project -> Targets->Capabilities ->App Group ID
+兩個ＡＰＰ皆需同一Group
+
+
+STEP 3: USE CODE
+
+A APP
+let wormhole = MMWormhole(applicationGroupIdentifier: "your group id", optionalDirectory: "wormhole")
+//pass data
+wormhole.passMessageObject("your data" as NSString, identifier: "locostring")
+
+
+
+B APP
+//receive data
+let wormhole = MMWormhole(applicationGroupIdentifier: "your group id", optionalDirectory: "wormhole")
+ wormhole.listenForMessage(withIdentifier: "locostring"){ (messageObject)  in
+            if let message = messageObject {
+                // Do something
+                self.myTextView.text = message as! String
+                print(message)
+            }
+}
